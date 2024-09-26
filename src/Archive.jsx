@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useContext } from "react";
+import { PostContext } from "./App";
 import { faker } from "@faker-js/faker";
 
-function Archive({ onAddPost }) {
+function Archive() {
+  const { onAddPost } = useContext(PostContext);
   const createRandomPost = () => {
     return {
       title: `${faker.hacker.adjective()} ${faker.hacker.noun()}`,
