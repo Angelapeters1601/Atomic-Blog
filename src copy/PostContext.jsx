@@ -57,4 +57,4 @@ const usePost = () => {
   return context;
 };
 
-export { PostContext, usePost };
+export { PostProvider, PostContext, usePost };
