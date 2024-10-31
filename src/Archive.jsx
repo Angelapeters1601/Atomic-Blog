@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { usePost } from "./PostContext";
+import React, { useState, memo } from "react";
 import { faker } from "@faker-js/faker";
 
-function Archive({ onAddPost }) {
+const Archive = memo(function Archive({ show }) {
   const createRandomPost = () => {
     return {
       title: `${faker.hacker.adjective()} ${faker.hacker.noun()}`,
@@ -19,10 +18,10 @@ function Archive({ onAddPost }) {
   const [posts] = useState(() =>
     // 💥 WARNING: This might make your computer slow!
     // Try a smaller `length` first
-    Array.from({ length: 10000 }, () => createRandomPost())
+    Array.from({ length: 30000 }, () => createRandomPost())
   );
 
-  const [showArchive, setShowArchive] = useState(false);
+  const [showArchive, setShowArchive] = useState(show);
 
   return (
     <aside>
@@ -45,5 +44,5 @@ function Archive({ onAddPost }) {
       )}
     </aside>
   );
-}
+});
 export default Archive;

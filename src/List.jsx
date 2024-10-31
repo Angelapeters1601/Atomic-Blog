@@ -11,7 +11,7 @@ function List({ posts }) {
           </li>
         ))}
       </ul>
-      <Test />
+      {/* <Test /> */}
     </div>
   );
 }
