@@ -49,7 +49,7 @@ function App() {
       show: false,
       title: `Post archive in addition to ${posts.length} main posts.`,
     };
-  }, [posts.length]);
+  }, [posts.length]); //for specificity
 
   return (
     <section>
