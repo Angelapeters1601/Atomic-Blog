@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function FormAddPost() {
+function FormAddPost({ onAddPost }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 

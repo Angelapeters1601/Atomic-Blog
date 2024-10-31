@@ -1,13 +1,14 @@
 import React, { useState, memo } from "react";
 import { faker } from "@faker-js/faker";
 
-const Archive = memo(function Archive({ show }) {
+const Archive = memo(function Archive({ archiveOptions }) {
   const createRandomPost = () => {
     return {
       title: `${faker.hacker.adjective()} ${faker.hacker.noun()}`,
       body: faker.hacker.phrase(),
     };
   };
+
   // Here we don't need the setter function. We're only using state to store
   // these posts because the callback function passed into useState
   // (which generates the posts) is only called once, on the initial render.
@@ -21,11 +22,11 @@ const Archive = memo(function Archive({ show }) {
     Array.from({ length: 30000 }, () => createRandomPost())
   );
 
-  const [showArchive, setShowArchive] = useState(show);
+  const [showArchive, setShowArchive] = useState(archiveOptions.show);
 
   return (
     <aside>
-      <h2>Post archive</h2>
+      <h2>{archiveOptions.title}</h2>
       <button onClick={() => setShowArchive((s) => !s)}>
         {showArchive ? "Hide archive posts" : "Show archive posts"}
       </button>

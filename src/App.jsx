@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { faker } from "@faker-js/faker";
 import MainBody from "./MainBody";
 import Header from "./Header";
@@ -44,6 +44,13 @@ function App() {
     [isFakeDark]
   );
 
+  const archiveOptions = useMemo(() => {
+    return {
+      show: false,
+      title: `Post archive in addition to ${posts.length} main posts.`,
+    };
+  }, [posts.length]);
+
   return (
     <section>
       <button
@@ -60,7 +67,7 @@ function App() {
         setSearchQuery={setSearchQuery}
       />
       <MainBody posts={searchedPosts} onAddPost={handleAddPost} />
-      <Archive show={false} />
+      <Archive archiveOptions={archiveOptions} />
       <Footer />
     </section>
   );
