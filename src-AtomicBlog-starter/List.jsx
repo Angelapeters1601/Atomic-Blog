@@ -1,8 +1,12 @@
-import Test from "./Test";
+import { useContext } from "react";
+import { PostContext } from "./App";
+import Test from "../src/Test";
 
-function List({ posts }) {
+function List() {
+  const { posts } = useContext(PostContext);
+
   return (
-    <div className="main">
+    <>
       <ul>
         {posts.map((post, i) => (
           <li key={i}>
@@ -12,7 +16,7 @@ function List({ posts }) {
         ))}
       </ul>
       <Test />
-    </div>
+    </>
   );
 }
 export default List;

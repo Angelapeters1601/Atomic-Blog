@@ -1,4 +1,5 @@
-import { usePosts } from "./PostContext";
+import { useContext } from "react";
+import { PostContext } from "./App.jsx";
 
 import Results from "./Results";
 import SearchPosts from "./SearchPosts";
@@ -6,7 +7,7 @@ import SearchPosts from "./SearchPosts";
 function Header() {
   //3)consuming the context
 
-  const { onClearPosts } = usePosts(); //destructure props
+  const { onClearPosts } = useContext(PostContext); //destructure props
 
   return (
     <header>

@@ -136,19 +136,19 @@ h3 {
   color: #333;
 }
 
-.main ul {
+main ul {
   list-style: none;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 32px;
 }
 
-.main li {
+main li {
   border: 1px solid #ffe8cc;
   padding: 16px 20px;
 }
 
-.main li:hover {
+main li:hover {
   background-color: #fff4e6;
 }
 

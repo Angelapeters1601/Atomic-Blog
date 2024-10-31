@@ -1,5 +1,11 @@
-import { useState, useContext } from "react";
+import "./App.css";
+import { createContext, useEffect, useState } from "react";
 import { faker } from "@faker-js/faker";
+
+import Header from "./Header";
+import MainBody from "./MainBody";
+import Archive from "./Archive";
+import Footer from "./Footer";
 
 const createRandomPost = () => {
   return {
@@ -9,13 +15,14 @@ const createRandomPost = () => {
 };
 
 //1) CREATE A CONTEXT
-const PostContext = createContext();
+export const PostContext = createContext();
 
-function PostProvider({ children }) {
+function App() {
   const [posts, setPosts] = useState(() =>
     Array.from({ length: 30 }, () => createRandomPost())
   );
   const [searchQuery, setSearchQuery] = useState("");
+  const [isFakeDark, setIsFakeDark] = useState(false);
 
   // Derived state. These are the posts that will actually be displayed
   const searchedPosts =
@@ -34,6 +41,12 @@ function PostProvider({ children }) {
   const handleClearPosts = () => {
     setPosts([]);
   };
+
+  // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
+  useEffect(() => {
+    document.documentElement.classList.toggle("fake-dark-mode");
+  }, [isFakeDark]);
+
   return (
     // 2) PROVIDE VALUE TO CHILD COMPONENT
     <PostContext.Provider
@@ -45,16 +58,21 @@ function PostProvider({ children }) {
         setSearchQuery,
       }}
     >
-      {children}
+      <section>
+        <button
+          onClick={() => setIsFakeDark((isFakeDark) => !isFakeDark)}
+          className="btn-fake-dark-mode"
+        >
+          {isFakeDark ? "☀️" : "🌙"}
+        </button>
+
+        <Header />
+        <MainBody />
+        <Archive />
+        <Footer />
+      </section>
     </PostContext.Provider>
   );
 }
-// custom hook:
-const usePost = () => {
-  const context = useContext(PostContext);
-  if (context === undefined)
-    throw new Error("PostContext was used outside of the PostProvider");
-  return context;
-};
 
-export { PostProvider, PostContext, usePost };
+export default App;
