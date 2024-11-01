@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { faker } from "@faker-js/faker";
 import MainBody from "./MainBody";
 import Header from "./Header";
@@ -29,9 +29,10 @@ function App() {
         )
       : posts;
 
-  function handleAddPost(post) {
+  const handleAddPost = useCallback(function handleAddPost(post) {
     setPosts((posts) => [post, ...posts]);
-  }
+  }, []); //useCallback
+
   function handleClearPosts() {
     setPosts([]);
   }
@@ -67,7 +68,7 @@ function App() {
         setSearchQuery={setSearchQuery}
       />
       <MainBody posts={searchedPosts} onAddPost={handleAddPost} />
-      <Archive archiveOptions={archiveOptions} />
+      <Archive archiveOptions={archiveOptions} onAddPost={handleAddPost} />
       <Footer />
     </section>
   );

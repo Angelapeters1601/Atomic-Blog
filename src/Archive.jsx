@@ -1,7 +1,7 @@
 import React, { useState, memo } from "react";
 import { faker } from "@faker-js/faker";
 
-const Archive = memo(function Archive({ archiveOptions }) {
+const Archive = memo(function Archive({ archiveOptions, onAddPost }) {
   const createRandomPost = () => {
     return {
       title: `${faker.hacker.adjective()} ${faker.hacker.noun()}`,
